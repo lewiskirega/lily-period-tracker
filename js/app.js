@@ -38,3 +38,11 @@ if (FEATURES.offline) {
     showInfo: (msg) => tracker.view.render('info', msg),
   });
 }
+
+// Initialize chat functionality
+if (typeof app.Chat !== 'undefined') {
+  tracker.chat = new app.Chat(tracker);
+} else {
+  // Chat is initialized via its own IIFE in chat.js
+  console.log('Chat module loaded independently');
+}

@@ -220,6 +220,33 @@
 
 <!-- ALERTS -->
   <div id="alerts" class="alerts-wrapper"></div>
+
+<!-- Chat Component -->
+<div id="chat-button" class="chat-button">
+  <svg class="icon chat-button__icon" focusable="false" aria-hidden="true">
+    <use href="#icon-edit"></use>
+  </svg>
+</div>
+<div id="chat-container" class="chat-container">
+  <div class="chat-header">
+    <h3 class="chat-header__title">Chat Assistant</h3>
+    <button class="chat-header__close" aria-label="Close chat">
+      <svg class="icon" focusable="false" aria-hidden="true">
+        <use href="#icon-cancel-circle"></use>
+      </svg>
+    </button>
+  </div>
+  <div id="chat-messages" class="chat-messages"></div>
+  <form id="chat-form" class="chat-form">
+    <input type="text" id="chat-input" class="chat-form__input" placeholder="Type your message..." aria-label="Type your message">
+    <button type="submit" class="chat-form__submit" aria-label="Send message">
+      <svg class="icon" focusable="false" aria-hidden="true">
+        <use href="#icon-next"></use>
+      </svg>
+    </button>
+  </form>
+</div>
+
 </main>
 
 <script src="vendor/moment-2.29.4.min.js"></script>
@@ -235,6 +262,10 @@
 <script src="js/controller.js"></script>
 <script src="js/offline.js"></script>
 <script src="js/app.js"></script>
+<script src="js/chat.js"></script>
+
+
+
 
 </body>
 </html>
