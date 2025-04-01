@@ -1,0 +1,111 @@
+/* FAQ Slideshow Styles */
+:root {
+  /* Uses same CSS variables as main.css */
+}
+
+.faq-slideshow {
+  margin: 2rem auto;
+  max-width: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--l-border-radius);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: var(--c-secondary-bg);
+}
+
+.faq-slideshow__title {
+  background-color: var(--c-theme-first);
+  color: var(--c-theme-second);
+  padding: 0.75rem 1rem;
+  margin: 0;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.faq-slides {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 120px;
+}
+
+.faq-slide {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.faq-slide:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.faq-slide__question {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: var(--c-theme-first);
+}
+
+.faq-slide__hint {
+  font-size: 0.8rem;
+  color: var(--c-secondary-text);
+  margin-top: 0.5rem;
+}
+
+.faq-navigation {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  background-color: var(--c-secondary-bg);
+}
+
+.faq-navigation__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--c-secondary-text);
+  margin: 0 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.faq-navigation__dot--active {
+  background-color: var(--c-theme-first);
+}
+
+.faq-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.faq-control {
+  background-color: rgba(0, 0, 0, 0.1);
+  color: var(--c-theme-first);
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color 0.3s ease;
+}
+
+.faq-control:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.faq-control__icon {
+  --l-icon-size: 1.2em;
+}

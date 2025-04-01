@@ -18,6 +18,7 @@
   <meta name="msapplication-TileColor" content="#2b5797">
   <meta name="msapplication-config" content="{{ url_for('static', filename='browserconfig.xml') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/faq-slideshow.css') }}">
 
 </head>
 <body>
@@ -240,20 +241,32 @@
     </div>
   </section>
 
+
 <!-- INVENTORY -->
-<section id="inventory" class="main-section main-section--inventory">
-  <div class="inventory-container">
+  <section id="inventory" class="main-section main-section--inventory">
     <h2>Inventory</h2>
-    <form id="inventory-form">
-      <input type="text" id="inventory-product" placeholder="Product Name" required>
-      <input type="number" id="inventory-quantity" placeholder="Quantity" required>
-      <input type="number" id="inventory-daily-usage" placeholder="Daily Usage" required>
-      <button type="submit" class="inventory__button">Add Item</button>
+    <form id="inventory-form" class="add-form add-form--inventory">
+      <input type="text" name="product" placeholder="Product Name" required aria-label="Product Name" id="productName">
+      <input type="number" name="quantity" placeholder="Quantity" min="1" required aria-label="Product Quantity" id="quantity">
+      <input type="number" name="dailyUsage" placeholder="Daily Usage" min="1" required aria-label="Daily Usage" id="dailyUsage">  
+      <button type="submit"  class="add-form__button">Add Inventory</button>
     </form>
-    <ul id="inventory-list"></ul>
-    <ul id="inventory-log" class="inventory-log"></ul>
-  </div>
-</section>
+    <table class="inventory-table" id="inventory-list"> 
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Daily Usage</th>
+          <th>Duration (Days)</th>
+          <th>End Date</th>
+        </tr>
+      </thead>
+      <tbody id="inventory-data">
+        <!-- Dynamic inventory rows will be inserted here -->
+      </tbody>
+    </table>
+  </section>
+
 
 <!-- NOT FOUND -->
   <section id="not-found" class="main-section main-section--not-found">
@@ -321,6 +334,7 @@
 <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 <script src="{{ url_for('static', filename='js/maps.js') }}"></script>
 <script src="{{ url_for('static', filename='js/inventory.js') }}"></script>
+<script src="{{ url_for('static', filename='js/faq-slideshow.js') }}"></script>
 
 <script>
   // Enhanced User Dropdown functionality

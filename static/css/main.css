@@ -5,8 +5,8 @@
   */
   --c-main-text: #333;
   --c-main-bg: #EEE;
-  --c-theme-first: rgb(194, 89, 28);
-  --c-theme-second: #40c41f;
+  --c-theme-first: rgb(100, 14, 212);
+  --c-theme-second: #7ed809;
   --c-secondary-text: #808080;
   --c-secondary-bg: #CCC;
 
@@ -856,75 +856,40 @@ tfoot .log-list__item--edit-form {
   height: 100%;
 }
 
-/* Inventory icon styles within calendar day cells */
-.calendar__day .inventory-icon {
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: 2px;
-  width: var(--l-icon-size);
-  height: var(--l-icon-size);
-  fill: var(--c-theme-first);
+/* Inventory Section Styles */
+.main-section--inventory {
+  padding: var(--l-gap);
 }
 
-/* Responsive adjustments for inventory icons */
-@media (max-width: 600px) {
-  .calendar__day .inventory-icon {
-    width: 0.8em;
-    height: 0.8em;
-  }
+.add-form--inventory {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--l-gap);
+  margin-bottom: var(--l-gap);
 }
 
-/* Inventory Section Styling */
-#inventory .inventory-container {
-  padding: 1rem;
-  background: #fff;
-  border-radius: var(--l-border-radius);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin: 1rem auto;
-  max-width: 500px;
-}
-
-#inventory-form input, #inventory-form button {
-  padding: 0.5rem;
-  margin: 0.5rem 0;
+.add-form--inventory input[type="text"],
+.add-form--inventory input[type="number"] {
   border: 1px solid var(--c-main-text);
   border-radius: var(--l-border-radius);
-  width: 100%;
+  padding: var(--l-gap);
+  flex: 1 1 auto;
 }
 
-/* Inventory Table Styles */
-#inventory-table {
+.inventory-table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 1rem;
+  margin-top: var(--l-gap);
 }
 
-#inventory-table thead {
-  background-color: #f5f5f5;
-}
-
-#inventory-table th, 
-#inventory-table td {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
+.inventory-table th,
+.inventory-table td {
+  border: 1px solid var(--c-secondary-bg);
+  padding: var(--l-gap);
   text-align: center;
-  font-size: 1rem;
 }
 
-#inventory-table tbody tr:nth-child(even) {
-  background-color: #fafafa;
-}
-
-#inventory-table tbody tr:hover {
-  background-color: #f0f0f0;
-}
-
-/* Notification styling for inventory additions */
-#inventory-log li {
-  background: var(--c-alert-success-light);
-  color: var(--c-alert-success-dark);
-  padding: 0.5rem;
-  margin-top: 0.5rem;
-  border-radius: var(--l-border-radius);
-  font-size: 0.9rem;
+.inventory-table th {
+  background: var(--c-secondary-bg);
+  font-weight: bold;
 }
