@@ -1,24 +1,30 @@
-const VERSION = '';
+const VERSION = '0.11.6'; // Increment version to force cache refresh
 const cacheName = `v${VERSION}::static`;
 
 const fileList = `
 ./
-css/main.css
-images/icon.svg
-js/app.js
-js/calendar.js
-js/config.js
-js/controller.js
-js/dates.js
-js/helpers.js
-js/model.js
-js/offline.js
-js/settings.js
-js/storage.js
-js/template.js
-js/view.js
-vendor/moment-2.29.4.min.js
-manifest.webmanifest
+static/css/main.css
+static/images/icon.svg
+static/images/apple-touch-icon.png
+static/images/icon16.png
+static/images/icon32.png
+static/images/icon192.png
+static/images/icon512.png
+static/images/mstile-150x150.png
+static/js/app.js
+static/js/calendar.js
+static/js/config.js
+static/js/controller.js
+static/js/dates.js
+static/js/helpers.js
+static/js/model.js
+static/js/offline.js
+static/js/settings.js
+static/js/storage.js
+static/js/template.js
+static/js/view.js
+static/vendor/moment-2.29.4.min.js
+static/manifest.webmanifest
 `
   .trim()
   .split('\n')
@@ -85,13 +91,89 @@ const clearAllCaches = () =>
   caches.keys().then((keys) => keys.forEach((key) => caches.delete(key)));
 
 self.addEventListener('activate', (event) => {
-  event.waitUntil(clearOldCaches().then(() => self.clients.claim()));
+  // Clear old caches and claim clients to ensure immediate control
+  event.waitUntil(
+    clearOldCaches()
+      .then(() => self.clients.claim())
+      .then(() => {
+        // Notify all clients that the service worker has been updated
+        return self.clients.matchAll().then(clients => {
+          return Promise.all(
+            clients.map(client => {
+              return client.postMessage({
+                type: 'SW_UPDATED',
+                version: VERSION
+              });
+            })
+          );
+        });
+      })
+  );
 });
 
 self.addEventListener('message', (event) => {
   console.log('sw received message:', event);
   if (event.data.type === 'clear') {
     console.log('delete all caches');
-    clearAllCaches();
+    event.waitUntil(
+      clearAllCaches().then(() => {
+        // Notify the client that sent the message that caches were cleared
+        if (event.source) {
+          event.source.postMessage({
+            type: 'CACHES_CLEARED',
+            success: true
+          });
+        }
+      })
+    );
+  } else if (event.data.type === 'update') {
+    // Force update by clearing caches and reloading files
+    event.waitUntil(
+      clearAllCaches()
+        .then(() => caches.open(cacheName))
+        .then(cache => {
+          return cache.addAll(
+            fileList.map(file => new Request(file, { cache: 'no-cache' }))
+          );
+        })
+        .then(() => {
+          console.log(`Service worker updated to version ${VERSION}`);
+          if (event.source) {
+            event.source.postMessage({
+              type: 'UPDATE_COMPLETE',
+              version: VERSION
+            });
+          }
+        })
+    );
+  }
+});
+
+// Add a function to check for updates that can be called from the client
+const checkForUpdates = () => {
+  return fetch('./sw.js', { cache: 'no-cache' })
+    .then(response => response.text())
+    .then(text => {
+      const versionMatch = text.match(/VERSION\s*=\s*['"]([^'"]+)['"]/);
+      if (versionMatch && versionMatch[1] !== VERSION) {
+        return { hasUpdate: true, newVersion: versionMatch[1] };
+      }
+      return { hasUpdate: false };
+    });
+};
+
+// Expose the update check function to clients
+self.addEventListener('message', event => {
+  if (event.data.type === 'CHECK_UPDATES') {
+    event.waitUntil(
+      checkForUpdates().then(result => {
+        if (event.source) {
+          event.source.postMessage({
+            type: 'UPDATE_CHECK_RESULT',
+            ...result
+          });
+        }
+      })
+    );
   }
 });

@@ -1,0 +1,135 @@
+/* auth.css - Styles for authentication pages */
+
+/* Container for authentication pages */
+.auth-container {
+  max-width: 400px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: var(--c-main-bg);
+  border: 1px solid var(--c-secondary-bg);
+  border-radius: var(--l-border-radius);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Form group layout */
+.auth-form-group {
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input field styling */
+.auth-form-group input[type="text"],
+.auth-form-group input[type="password"],
+.auth-form-group input[type="email"],
+.auth-form-group input[type="date"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid var(--c-secondary-bg);
+  border-radius: var(--l-border-radius);
+  background: #fff;
+  color: var(--c-main-text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.auth-form-group input[type="text"]:focus,
+.auth-form-group input[type="password"]:focus,
+.auth-form-group input[type="email"]:focus,
+.auth-form-group input[type="date"]:focus {
+  outline: none;
+  border-color: var(--c-theme-first);
+  box-shadow: 0 0 0 2px rgba(194, 89, 28, 0.2);
+}
+
+/* Label styling */
+.auth-form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: var(--c-main-text);
+}
+
+/* Button styles for authentication pages */
+.auth-button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem;
+  font-size: 1rem;
+  text-align: center;
+  border: none;
+  border-radius: var(--l-border-radius);
+  background: var(--c-theme-first);
+  color: var(--c-theme-second);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: bold;
+}
+
+.auth-button:hover {
+  background: var(--c-theme-second);
+  color: var(--c-theme-first);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.auth-button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Alert message styles for authentication pages */
+.auth-alert {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid;
+  border-radius: var(--l-border-radius);
+  font-size: 0.9rem;
+  transition: opacity 0.3s ease;
+}
+
+.auth-alert--info {
+  background: var(--c-alert-info-light);
+  color: var(--c-alert-info-dark);
+  border-color: var(--c-alert-info-dark);
+}
+
+.auth-alert--error {
+  background: var(--c-alert-error-light);
+  color: var(--c-alert-error-dark);
+  border-color: var(--c-alert-error-dark);
+}
+
+.auth-alert--success {
+  background: var(--c-alert-success-light);
+  color: var(--c-alert-success-dark);
+  border-color: var(--c-alert-success-dark);
+}
+
+.auth-alert--warning {
+  background: var(--c-alert-warning-light);
+  color: var(--c-alert-warning-dark);
+  border-color: var(--c-alert-warning-dark);
+}
+
+/* Additional form styling */
+.auth-form-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  color: var(--c-theme-first);
+}
+
+.auth-form-footer {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-form-footer a {
+  color: var(--c-theme-first);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.auth-form-footer a:hover {
+  color: var(--c-theme-second);
+  text-decoration: underline;
+}
